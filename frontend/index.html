@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Behavioral Intelligence Tool</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Companies House Behavioral Intelligence</h1>
+    </header>
+
+    <main>
+        <section class="search-section">
+            <form id="search-form">
+                <label for="company-number">Company Number</label>
+                <div class="search-row">
+                    <input type="text" id="company-number" placeholder="e.g. 12345678" maxlength="8" autocomplete="off">
+                    <button type="submit" id="analyze-btn">Analyze</button>
+                </div>
+            </form>
+            <div id="error-message" class="error hidden"></div>
+        </section>
+
+        <section id="company-header" class="company-header hidden">
+            <div class="company-header-row">
+                <div class="company-header-left">
+                    <h2 id="company-name"></h2>
+                    <p id="company-meta"></p>
+                </div>
+                <div class="company-header-right">
+                    <span id="usage-indicator" class="usage-indicator"></span>
+                    <span id="last-refreshed" class="last-refreshed"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Verdict Strip -->
+        <section id="verdict-strip" class="verdict-strip hidden">
+            <div class="verdict-main">
+                <span class="verdict-label">Verdict:</span>
+                <span id="verdict-text" class="verdict-text"></span>
+            </div>
+            <div class="verdict-drivers" id="verdict-drivers"></div>
+            <div class="verdict-confidence" id="verdict-confidence"></div>
+        </section>
+
+        <!-- Legend Line -->
+        <div id="legend-line" class="legend-line hidden">
+            <span class="legend-item"><span class="legend-dot green"></span> No concern</span>
+            <span class="legend-item"><span class="legend-dot amber"></span> Probe it</span>
+            <span class="legend-item"><span class="legend-dot red"></span> Verify early</span>
+            <span class="legend-sep">|</span>
+            <span class="legend-item">Verified = registry fact</span>
+            <span class="legend-item">Inferred = pattern detection</span>
+        </div>
+
+        <!-- Micro-disclaimer -->
+        <div id="micro-disclaimer" class="micro-disclaimer hidden">
+            <span>Guide only. Public registry signals, not a substitute for diligence or investment judgement.</span>
+            <button id="method-limits-btn" class="method-limits-btn">ⓘ Method & limits</button>
+        </div>
+
+        <!-- Method & Limits Popover -->
+        <div id="method-limits-popover" class="method-limits-popover hidden">
+            <div class="popover-header">
+                <strong>Method & Limits</strong>
+                <button id="popover-close" class="popover-close">✕</button>
+            </div>
+            <div class="popover-content">
+                <p><strong>What this is:</strong> Automated pattern detection from Companies House and related public records.</p>
+                <p><strong>What it is not:</strong> Not legal, tax, accounting, or investment advice. Not a guarantee of accuracy or completeness.</p>
+                <p><strong>How to use:</strong> Use as a starting point to direct diligence and conversations, validate material items independently.</p>
+                <p><strong>Known limits:</strong></p>
+                <ul>
+                    <li>Cannot determine where IP, contracts, or property sit.</li>
+                    <li>Inferred signals are probabilistic, not proof.</li>
+                    <li>Data may be delayed or incomplete.</li>
+                </ul>
+            </div>
+        </div>
+
+        <section id="dimensions-grid" class="dimensions-grid hidden">
+            <!-- Cards rendered by JS -->
+        </section>
+
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Analyzing company...</p>
+        </div>
+
+        <footer id="metadata" class="metadata hidden"></footer>
+    </main>
+
+    <!-- Drawer Overlay -->
+    <div id="drawer-overlay" class="drawer-overlay"></div>
+
+    <!-- Evidence Drawer -->
+    <aside id="evidence-drawer" class="evidence-drawer">
+        <div class="drawer-header">
+            <div class="drawer-title-row">
+                <span id="drawer-title"></span>
+                <span id="drawer-rating" class="badge"></span>
+            </div>
+            <div id="drawer-evidence-summary" class="drawer-evidence-summary"></div>
+            <button id="drawer-close" class="drawer-close">✕</button>
+        </div>
+        <div class="drawer-tabs">
+            <button class="drawer-tab active" data-tab="evidence">Evidence</button>
+            <button class="drawer-tab" data-tab="interpretation">Interpretation</button>
+        </div>
+        <div class="drawer-content">
+            <div id="tab-evidence" class="tab-content active"></div>
+            <div id="tab-interpretation" class="tab-content"></div>
+        </div>
+    </aside>
+
+    <script src="app.js"></script>
+</body>
+</html>
